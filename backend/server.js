@@ -15,7 +15,7 @@ import adminRouter, { publicLeadRouter } from "./routes/adminRoutes.js";
 import { markLeadConverted } from "./services/leadService.js";
 
 const app = express();
-const port = Number(process.env.BACKEND_PORT || 3002);
+const port = Number(process.env.PORT || process.env.BACKEND_PORT || 3002);
 const supabaseBootConfig = getSupabaseConfigStatus();
 
 app.use(cors());

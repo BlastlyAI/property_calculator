@@ -1,7 +1,8 @@
 import type { ApiResponse, PaymentConfirmResult, PaymentSession } from "../types/calculator";
+import { apiUrl } from "./apiBase";
 
 export async function fetchPaymentConfig(): Promise<{ publishableKey: string; currency: string }> {
-  const res = await fetch("/api/payments/config");
+  const res = await fetch(apiUrl("/api/payments/config"));
   const data: ApiResponse<{ publishableKey: string; currency: string }> = await res.json();
   if (!res.ok || !data.success || !data.data) {
     throw new Error(data.error?.message || "Failed to load payment config");
@@ -10,7 +11,7 @@ export async function fetchPaymentConfig(): Promise<{ publishableKey: string; cu
 }
 
 export async function createPaymentIntent(bookingId: string, customerEmail?: string): Promise<PaymentSession> {
-  const res = await fetch("/api/payments/create-intent", {
+  const res = await fetch(apiUrl("/api/payments/create-intent"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ bookingId, customerEmail }),
@@ -23,7 +24,7 @@ export async function createPaymentIntent(bookingId: string, customerEmail?: str
 }
 
 export async function confirmPayment(bookingId: string, paymentIntentId: string): Promise<PaymentConfirmResult> {
-  const res = await fetch("/api/payments/confirm", {
+  const res = await fetch(apiUrl("/api/payments/confirm"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ bookingId, paymentIntentId }),

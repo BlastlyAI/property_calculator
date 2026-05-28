@@ -1,4 +1,5 @@
 import type { ApiResponse } from "../../types/calculator";
+import { apiUrl } from "../../services/apiBase";
 import type { AdminSession, AdminUser, BookingRow, DashboardOverview, Paginated } from "../types/admin";
 
 const SESSION_KEY = "homesnap.admin.session";
@@ -28,7 +29,7 @@ async function adminFetch<T>(path: string, options: RequestInit = {}) {
   headers.set("Content-Type", "application/json");
   if (token) headers.set("Authorization", `Bearer ${token}`);
 
-  const res = await fetch(`/api/admin${path}`, { ...options, headers });
+  const res = await fetch(apiUrl(`/api/admin${path}`), { ...options, headers });
   const data: ApiResponse<T> = await res.json();
   if (!res.ok || !data.success || data.data === undefined) {
     throw new Error(data.error?.message || "Admin request failed");
@@ -37,7 +38,7 @@ async function adminFetch<T>(path: string, options: RequestInit = {}) {
 }
 
 export async function adminLogin(email: string, password: string) {
-  const res = await fetch("/api/admin/auth/login", {
+  const res = await fetch(apiUrl("/api/admin/auth/login"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),

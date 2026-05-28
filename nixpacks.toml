@@ -1,0 +1,9 @@
+# Helps Railway/Nixpacks detect Node app at repository root
+[phases.setup]
+nixPkgs = ["nodejs_22", "pnpm"]
+
+[phases.install]
+cmds = ["pnpm install --frozen-lockfile || pnpm install"]
+
+[start]
+cmd = "node backend/server.js"

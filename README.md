@@ -53,6 +53,29 @@ The endpoint returns:
 4. Use test card `4242 4242 4242 4242` with any future expiry and CVC.
 5. Set `PAYMENT_DEBUG=false` to disable payment debug logs in production.
 
+## Railway backend deploy
+
+Railpack fails if **Root Directory** is set to `backend` without `package.json`. Use one of these:
+
+### Option A (recommended): Repo root
+
+1. Railway → Service → **Settings**
+2. **Root Directory:** leave empty (repository root)
+3. **Start Command:** `node backend/server.js`
+4. Add all env vars from `.env.local` in Railway Variables
+5. Redeploy
+
+### Option B: Backend folder only
+
+1. **Root Directory:** `backend`
+2. **Start Command:** `pnpm start` or `node server.js`
+3. `backend/package.json` is included for Node detection
+4. Add env vars in Railway Variables
+
+### Verify
+
+Open: `https://YOUR-RAILWAY-URL/api/db-test` → should return `"success": true`
+
 ## Admin panel
 
 1. Run migration `backend/db/migrations/003_admin_leads.sql` in Supabase.

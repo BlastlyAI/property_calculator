@@ -1,4 +1,5 @@
 import type { ApiResponse, QuoteRange, ServiceId } from "../types/calculator";
+import { apiUrl } from "./apiBase";
 
 const SESSION_KEY = "homesnap.lead.session";
 
@@ -23,7 +24,7 @@ export async function trackLead(payload: {
   status?: string;
 }) {
   try {
-    const res = await fetch("/api/leads/track", {
+    const res = await fetch(apiUrl("/api/leads/track"), {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({

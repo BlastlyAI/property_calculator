@@ -8,6 +8,7 @@ import type {
   ServiceConfig,
   ServiceId,
 } from "../types/calculator";
+import { apiUrl } from "./apiBase";
 
 export interface PlacePrediction {
   placeId: string;
@@ -25,7 +26,7 @@ export interface PlacePrediction {
 }
 
 export async function fetchAddressPredictions(input: string): Promise<PlacePrediction[]> {
-  const res = await fetch(`/api/places/autocomplete?input=${encodeURIComponent(input)}`);
+  const res = await fetch(apiUrl(`/api/places/autocomplete?input=${encodeURIComponent(input)}`));
   if (!res.ok) throw new Error("Failed to fetch address suggestions");
   const data: ApiResponse<{ predictions: PlacePrediction[] }> = await res.json();
   if (!data.success || !data.data) throw new Error(data.error?.message || "Failed to fetch address suggestions");
@@ -33,7 +34,7 @@ export async function fetchAddressPredictions(input: string): Promise<PlacePredi
 }
 
 export async function resolveAddressFromText(input: string): Promise<PlacePrediction> {
-  const res = await fetch(`/api/places/resolve-text?input=${encodeURIComponent(input)}`);
+  const res = await fetch(apiUrl(`/api/places/resolve-text?input=${encodeURIComponent(input)}`));
   if (!res.ok) throw new Error("Failed to resolve typed address");
   const data: ApiResponse<{ address: PlacePrediction }> = await res.json();
   if (!data.success || !data.data) throw new Error(data.error?.message || "Failed to resolve typed address");
@@ -41,7 +42,7 @@ export async function resolveAddressFromText(input: string): Promise<PlacePredic
 }
 
 export async function fetchPropertyData(placeId: string, service: ServiceId): Promise<{ property: PropertyData; quote: QuoteRange }> {
-  const res = await fetch(`/api/property-data?placeId=${encodeURIComponent(placeId)}&service=${service}`);
+  const res = await fetch(apiUrl(`/api/property-data?placeId=${encodeURIComponent(placeId)}&service=${service}`));
   if (!res.ok) throw new Error("Failed to load property data");
   const data: ApiResponse<{ property: PropertyData; quote: QuoteRange }> = await res.json();
   if (!data.success || !data.data) throw new Error(data.error?.message || "Failed to load property data");
@@ -49,7 +50,7 @@ export async function fetchPropertyData(placeId: string, service: ServiceId): Pr
 }
 
 export async function fetchQuote(serviceId: ServiceId, property: PropertyData, answers: ServiceAnswers[ServiceId]): Promise<QuoteRange> {
-  const res = await fetch("/api/quote", {
+  const res = await fetch(apiUrl("/api/quote"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ serviceId, property, answers }),
@@ -61,7 +62,7 @@ export async function fetchQuote(serviceId: ServiceId, property: PropertyData, a
 }
 
 export async function fetchServiceConfigs(): Promise<ServiceConfig[]> {
-  const res = await fetch("/api/service-configs");
+  const res = await fetch(apiUrl("/api/service-configs"));
   if (!res.ok) throw new Error("Failed to load service config");
   const data: ApiResponse<{ services: ServiceConfig[] }> = await res.json();
   if (!data.success || !data.data) throw new Error(data.error?.message || "Failed to load service config");
@@ -69,7 +70,7 @@ export async function fetchServiceConfigs(): Promise<ServiceConfig[]> {
 }
 
 export async function createBooking(payload: BookingRequestPayload): Promise<BookingResponse> {
-  const res = await fetch("/api/bookings", {
+  const res = await fetch(apiUrl("/api/bookings"), {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify(payload),
