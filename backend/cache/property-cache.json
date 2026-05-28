@@ -1007,5 +1007,115 @@
         "confidence": "estimated"
       }
     }
+  },
+  "place:v9:osm_eyJmb3JtYXR0ZWRBZGRyZXNzIjoiSW5kb3JlLCBKdW5pIEluZG9yZSBUYWhzaWwsIEluZG9yZSwgTWFkaHlhIFByYWRlc2gsIDQ1MjAwMSwgSW5kaWEiLCJsYXQiOjIyLjcyMDM2MTYsImxuZyI6NzUuODY4MTk5Niwic3VidXJiIjoiSW5kb3JlIiwic3RhdGUiOiJNYWRoeWEgUHJhZGVzaCIsInBvc3Rjb2RlIjoiNDUyMDAxIiwib3NtQ2xhc3MiOm51bGwsIm9zbVR5cGUiOiJjaXR5Iiwib3NtSW1wb3J0YW5jZSI6MC41NTQ0MDg3MjU1MDYzMTM1LCJvc21BZGRyZXNzVHlwZSI6ImNpdHkiLCJleHRyYXRhZ3MiOnsiY2FwaXRhbCI6IjUiLCJ3aWtpZGF0YSI6IlE2NjYxNiIsInBsYWNlOmNjYSI6ImIxIiwicG9wdWxhdGlvbiI6IjMyNzIzMzUifX0": {
+    "cachedAt": 1779965885464,
+    "value": {
+      "placeId": "osm_eyJmb3JtYXR0ZWRBZGRyZXNzIjoiSW5kb3JlLCBKdW5pIEluZG9yZSBUYWhzaWwsIEluZG9yZSwgTWFkaHlhIFByYWRlc2gsIDQ1MjAwMSwgSW5kaWEiLCJsYXQiOjIyLjcyMDM2MTYsImxuZyI6NzUuODY4MTk5Niwic3VidXJiIjoiSW5kb3JlIiwic3RhdGUiOiJNYWRoeWEgUHJhZGVzaCIsInBvc3Rjb2RlIjoiNDUyMDAxIiwib3NtQ2xhc3MiOm51bGwsIm9zbVR5cGUiOiJjaXR5Iiwib3NtSW1wb3J0YW5jZSI6MC41NTQ0MDg3MjU1MDYzMTM1LCJvc21BZGRyZXNzVHlwZSI6ImNpdHkiLCJleHRyYXRhZ3MiOnsiY2FwaXRhbCI6IjUiLCJ3aWtpZGF0YSI6IlE2NjYxNiIsInBsYWNlOmNjYSI6ImIxIiwicG9wdWxhdGlvbiI6IjMyNzIzMzUifX0",
+      "formattedAddress": "Indore, Juni Indore Tahsil, Indore, Madhya Pradesh, 452001, India",
+      "lat": 22.7203616,
+      "lng": 75.8681996,
+      "suburb": "Indore",
+      "state": "Madhya Pradesh",
+      "postcode": "452001",
+      "satelliteImageUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=75.8669996%2C22.7194616%2C75.8693996%2C22.721261600000002&bboxSR=4326&size=1200%2C800&imageSR=4326&format=jpg&f=image",
+      "satelliteImageUrls": [
+        "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=75.8669996%2C22.7194616%2C75.8693996%2C22.721261600000002&bboxSR=4326&size=1200%2C800&imageSR=4326&format=jpg&f=image",
+        "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=75.8656996%2C22.7185616%2C75.8706996%2C22.7221616&bboxSR=4326&size=1200%2C800&imageSR=4326&format=jpg&f=image",
+        "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/18/114076/186317"
+      ],
+      "provider": "mock",
+      "propertyType": "unit",
+      "occupancyCategory": "residential",
+      "isResidential": true,
+      "sizeBand": "medium",
+      "bedrooms": 3,
+      "bathrooms": 2,
+      "houseSizeSqm": 175,
+      "landSizeSqm": 233,
+      "storeys": "double",
+      "gardenSizeSqm": 9,
+      "windowEstimate": 16,
+      "carpetedRoomsEstimate": 3,
+      "hasPool": false,
+      "poolSizeSqm": 0,
+      "estimationMeta": {
+        "confidenceScore": "high",
+        "density": "medium",
+        "estimatedFrom": [
+          "osm",
+          "heuristics",
+          "landmark-detection"
+        ],
+        "signalsUsed": [
+          "geocoding",
+          "suburb-density",
+          "osm-building-tags",
+          "heuristic-footprint",
+          "config-rules"
+        ],
+        "footprintSqm": 596,
+        "builtAreaSqm": 1680
+      },
+      "providerMeta": {
+        "source": "mockProvider",
+        "confidence": "estimated"
+      }
+    }
+  },
+  "place:v9:osm_eyJmb3JtYXR0ZWRBZGRyZXNzIjoiSW5kaWFuYSwgVW5pdGVkIFN0YXRlcyIsImxhdCI6NDAuMzI3MDEyNywibG5nIjotODYuMTc0NjkzMywic3VidXJiIjpudWxsLCJzdGF0ZSI6IkluZGlhbmEiLCJwb3N0Y29kZSI6bnVsbCwib3NtQ2xhc3MiOm51bGwsIm9zbVR5cGUiOiJhZG1pbmlzdHJhdGl2ZSIsIm9zbUltcG9ydGFuY2UiOjAuNzY3ODM1NzA3NjI3ODk5NSwib3NtQWRkcmVzc1R5cGUiOiJzdGF0ZSIsImV4dHJhdGFncyI6eyJpc19pbiI6IlVTQSIsIm5pY2tuYW1lIjoiVGhlIEhvb3NpZXIgU3RhdGUiLCJyZWY6VVNDRyI6IklOIiwicmVmOlVTUFMiOiJJTiIsInJlZjpmaXBzIjoiMTgiLCJ3aWtpZGF0YSI6IlExNDE1Iiwid2lraXBlZGlhIjoiZW46SW5kaWFuYSIsInBvcHVsYXRpb24iOiI2OTI0Mjc1IiwiYm9yZGVyX3R5cGUiOiJzdGF0ZSIsImxpbmtlZF9wbGFjZSI6InN0YXRlIiwicG9wdWxhdGlvbjpkYXRlIjoiMjAyNC0wNy0wMSIsImFkbWluX2xldmVsIjoiNCJ9fQ": {
+    "cachedAt": 1779982010429,
+    "value": {
+      "placeId": "osm_eyJmb3JtYXR0ZWRBZGRyZXNzIjoiSW5kaWFuYSwgVW5pdGVkIFN0YXRlcyIsImxhdCI6NDAuMzI3MDEyNywibG5nIjotODYuMTc0NjkzMywic3VidXJiIjpudWxsLCJzdGF0ZSI6IkluZGlhbmEiLCJwb3N0Y29kZSI6bnVsbCwib3NtQ2xhc3MiOm51bGwsIm9zbVR5cGUiOiJhZG1pbmlzdHJhdGl2ZSIsIm9zbUltcG9ydGFuY2UiOjAuNzY3ODM1NzA3NjI3ODk5NSwib3NtQWRkcmVzc1R5cGUiOiJzdGF0ZSIsImV4dHJhdGFncyI6eyJpc19pbiI6IlVTQSIsIm5pY2tuYW1lIjoiVGhlIEhvb3NpZXIgU3RhdGUiLCJyZWY6VVNDRyI6IklOIiwicmVmOlVTUFMiOiJJTiIsInJlZjpmaXBzIjoiMTgiLCJ3aWtpZGF0YSI6IlExNDE1Iiwid2lraXBlZGlhIjoiZW46SW5kaWFuYSIsInBvcHVsYXRpb24iOiI2OTI0Mjc1IiwiYm9yZGVyX3R5cGUiOiJzdGF0ZSIsImxpbmtlZF9wbGFjZSI6InN0YXRlIiwicG9wdWxhdGlvbjpkYXRlIjoiMjAyNC0wNy0wMSIsImFkbWluX2xldmVsIjoiNCJ9fQ",
+      "formattedAddress": "Indiana, United States",
+      "lat": 40.3270127,
+      "lng": -86.1746933,
+      "suburb": null,
+      "state": "Indiana",
+      "postcode": null,
+      "satelliteImageUrl": "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=-86.1758933%2C40.326112699999996%2C-86.1734933%2C40.3279127&bboxSR=4326&size=1200%2C800&imageSR=4326&format=jpg&f=image",
+      "satelliteImageUrls": [
+        "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=-86.1758933%2C40.326112699999996%2C-86.1734933%2C40.3279127&bboxSR=4326&size=1200%2C800&imageSR=4326&format=jpg&f=image",
+        "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export?bbox=-86.1771933%2C40.325212699999994%2C-86.1721933%2C40.3288127&bboxSR=4326&size=1200%2C800&imageSR=4326&format=jpg&f=image",
+        "https://services.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/18/98930/68321"
+      ],
+      "provider": "mock",
+      "propertyType": "unit",
+      "occupancyCategory": "residential",
+      "isResidential": true,
+      "sizeBand": "large",
+      "bedrooms": 4,
+      "bathrooms": 3,
+      "houseSizeSqm": 279,
+      "landSizeSqm": 335,
+      "storeys": "single",
+      "gardenSizeSqm": 36,
+      "windowEstimate": 19,
+      "carpetedRoomsEstimate": 4,
+      "hasPool": false,
+      "poolSizeSqm": 0,
+      "estimationMeta": {
+        "confidenceScore": "low",
+        "density": "low",
+        "estimatedFrom": [
+          "osm",
+          "heuristics",
+          "landmark-detection"
+        ],
+        "signalsUsed": [
+          "geocoding",
+          "suburb-density",
+          "osm-building-tags",
+          "heuristic-footprint",
+          "config-rules"
+        ],
+        "footprintSqm": 820,
+        "builtAreaSqm": 1160
+      },
+      "providerMeta": {
+        "source": "mockProvider",
+        "confidence": "estimated"
+      }
+    }
   }
 }

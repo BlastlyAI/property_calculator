@@ -5,6 +5,7 @@ import { CalcScreen2 } from './pages/CalcScreen2';
 import { CalcScreen3 } from './pages/CalcScreen3';
 import { CalcScreen4 } from './pages/CalcScreen4';
 import { CalcScreen5 } from './pages/CalcScreen5';
+import { CalcPayment } from './pages/CalcPayment';
 import { CalcConfirm } from './pages/CalcConfirm';
 import { EmbedDemo } from './pages/EmbedDemo';
 
@@ -15,6 +16,7 @@ import { BusinessSuccess } from './pages/BusinessSuccess';
 import { BusinessUpsell } from './pages/BusinessUpsell';
 import { BusinessDashboard } from './pages/BusinessDashboard';
 import { BusinessDemoCalculator } from './pages/BusinessDemoCalculator';
+import { AdminRoutes } from './admin/AdminRoutes';
 
 export default function App() {
   return (
@@ -27,6 +29,7 @@ export default function App() {
       <Route path="/calculator/3" element={<CalcScreen3 />} />
       <Route path="/calculator/4" element={<CalcScreen4 />} />
       <Route path="/calculator/5" element={<CalcScreen5 />} />
+      <Route path="/calculator/payment" element={<CalcPayment />} />
       <Route path="/calculator/confirm" element={<CalcConfirm />} />
       <Route path="/embed-demo" element={<EmbedDemo />} />
 
@@ -37,6 +40,9 @@ export default function App() {
       <Route path="/business/upsell" element={<BusinessUpsell />} />
       <Route path="/business/dashboard" element={<BusinessDashboard />} />
       <Route path="/business/demo-calculator" element={<BusinessDemoCalculator />} />
+
+      {/* Admin panel (separate authenticated system) */}
+      <Route path="/admin/*" element={<AdminRoutes />} />
 
       {/* Fallback */}
       <Route path="*" element={<Navigate to="/" replace />} />

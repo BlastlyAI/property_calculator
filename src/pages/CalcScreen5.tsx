@@ -1,20 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CalculatorShell } from './components/CalculatorShell';
 import { ChevronRight, Calendar, Clock } from 'lucide-react';
 import { useCalculator } from '../state/calculatorContext';
+import { createBooking, fetchPropertyData } from '../services/propertyApi';
+import { getLeadSessionId } from '../services/leadApi';
 
 const TIMES = ['7:00 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM'];
 
 export function CalcScreen5() {
   const navigate = useNavigate();
-  const { selectedService, propertyData, quote } = useCalculator();
+  const {
+    isHydrated,
+    selectedService,
+    addressSelection,
+    propertyData,
+    quote,
+    answers,
+    setPropertyData,
+    setQuote,
+    setActiveBooking,
+    setCustomerEmail,
+    setScheduleSummary,
+    setPaymentResult,
+  } = useCalculator();
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [email, setEmail] = useState('');
   const [selectedDate, setSelectedDate] = useState<number | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [notes, setNotes] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+  const [restoringSession, setRestoringSession] = useState(false);
 
   const today = new Date();
   const dates = Array.from({ length: 14 }, (_, i) => {
@@ -23,7 +41,102 @@ export function CalcScreen5() {
     return d;
   });
 
-  const canSubmit = name && phone && selectedDate !== null && selectedTime;
+  const canSubmit = Boolean(name.trim() && phone.trim() && selectedDate !== null && selectedTime);
+
+  const sessionReady = Boolean(selectedService && propertyData && quote);
+
+  const blockingReason = useMemo(() => {
+    if (!isHydrated || restoringSession) return null;
+    if (!name.trim()) return 'Please enter your full name.';
+    if (!phone.trim()) return 'Please enter your mobile number.';
+    if (selectedDate === null) return 'Please choose a booking date.';
+    if (!selectedTime) return 'Please choose a preferred time.';
+    if (!selectedService) return 'Service not selected. Please restart from step 1.';
+    if (!propertyData || !quote) return 'Property session expired. Restoring your address...';
+    return null;
+  }, [isHydrated, restoringSession, name, phone, selectedDate, selectedTime, selectedService, propertyData, quote]);
+
+  useEffect(() => {
+    if (!isHydrated) return;
+    if (!selectedService || !addressSelection?.placeId) {
+      navigate('/calculator/1');
+      return;
+    }
+    if (propertyData && quote) return;
+
+    let cancelled = false;
+    (async () => {
+      try {
+        setRestoringSession(true);
+        setSubmitError(null);
+        const data = await fetchPropertyData(addressSelection.placeId, selectedService);
+        if (cancelled) return;
+        setPropertyData(data.property);
+        setQuote(data.quote);
+      } catch {
+        if (!cancelled) {
+          setSubmitError('Could not restore property details. Please go back to step 1 and select your address again.');
+        }
+      } finally {
+        if (!cancelled) setRestoringSession(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [
+    isHydrated,
+    selectedService,
+    addressSelection?.placeId,
+    propertyData,
+    quote,
+    navigate,
+    setPropertyData,
+    setQuote,
+  ]);
+
+  const handleSubmit = async () => {
+    if (!canSubmit || !sessionReady || selectedDate === null || !selectedTime) {
+      setSubmitError(blockingReason || 'Please complete all required booking details.');
+      return;
+    }
+    try {
+      setSubmitting(true);
+      setSubmitError(null);
+      const selectedDateValue = dates[selectedDate];
+      setPaymentResult(null);
+      const result = await createBooking({
+        serviceId: selectedService,
+        property: propertyData,
+        quote,
+        answers: (answers[selectedService] as Record<string, unknown>) || {},
+        customer: {
+          fullName: name.trim(),
+          phone: phone.trim(),
+          email: email.trim() || undefined,
+        },
+        schedule: {
+          date: selectedDateValue.toISOString(),
+          time: selectedTime,
+          notes: notes.trim() || undefined,
+        },
+        sessionId: getLeadSessionId(),
+      });
+      setActiveBooking(result.booking);
+      setCustomerEmail(email.trim() || null);
+      setScheduleSummary({
+        dateLabel: selectedDateValue.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'long' }),
+        time: selectedTime,
+      });
+      navigate('/calculator/payment');
+    } catch (error) {
+      const message = error instanceof Error ? error.message : 'Failed to submit booking';
+      setSubmitError(message);
+    } finally {
+      setSubmitting(false);
+    }
+  };
 
   return (
     <CalculatorShell step={5} screenHint="5">
@@ -133,16 +246,38 @@ export function CalcScreen5() {
           </div>
         </div>
 
+        {blockingReason && !submitError && (
+          <p style={{ textAlign: 'center', fontSize: 12, color: '#b45309', marginBottom: '0.5rem' }}>
+            {blockingReason}
+          </p>
+        )}
+
         <button
           className="btn-gold"
-          disabled={!canSubmit}
-          style={{ width: '100%', fontSize: 16, padding: '1rem' }}
-          onClick={() => navigate('/calculator/confirm')}
+          disabled={!canSubmit || !sessionReady || submitting || restoringSession}
+          style={{
+            width: '100%',
+            fontSize: 16,
+            padding: '1rem',
+            opacity: !canSubmit || !sessionReady || submitting || restoringSession ? 0.55 : 1,
+            cursor: !canSubmit || !sessionReady || submitting || restoringSession ? 'not-allowed' : 'pointer',
+          }}
+          onClick={handleSubmit}
         >
-          Confirm Booking Request <ChevronRight size={18} />
+          {restoringSession
+            ? 'Restoring session...'
+            : submitting
+              ? 'Saving booking...'
+              : 'Continue to Secure Payment'}{' '}
+          {!submitting && !restoringSession && <ChevronRight size={18} />}
         </button>
+        {submitError && (
+          <p style={{ textAlign: 'center', fontSize: 12, color: '#b91c1c', marginTop: '0.5rem' }}>
+            {submitError}
+          </p>
+        )}
         <p style={{ textAlign: 'center', fontSize: 12, color: '#9ca3af', marginTop: '0.5rem' }}>
-          No payment now · The cleaner will confirm within 2 hours
+          Secure Stripe checkout on the next step · Sandbox test cards supported
         </p>
       </div>
     </CalculatorShell>

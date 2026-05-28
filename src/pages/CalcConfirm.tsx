@@ -6,7 +6,8 @@ import { useCalculator } from '../state/calculatorContext';
 
 export function CalcConfirm() {
   const navigate = useNavigate();
-  const { selectedService, propertyData, quote } = useCalculator();
+  const { selectedService, propertyData, quote, activeBooking, scheduleSummary, paymentResult } = useCalculator();
+  const paidAmount = paymentResult ? (paymentResult.amountCents / 100).toFixed(0) : null;
   const [tick, setTick] = useState(false);
   const [showContent, setShowContent] = useState(false);
 
@@ -59,11 +60,11 @@ export function CalcConfirm() {
       {/* Heading */}
       <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
         <h1 style={{ fontSize: 28, fontWeight: 800, color: 'white', marginBottom: '0.625rem' }}>
-          Booking request sent! 🎉
+          Booking confirmed & paid! 🎉
         </h1>
         <p style={{ fontSize: 16, color: 'rgba(255,255,255,0.75)', lineHeight: 1.6 }}>
-          We've sent your request to local cleaners.<br />
-          You'll hear back within 2 hours.
+          Your deposit was received securely via Stripe.<br />
+          A cleaner will confirm your booking shortly.
         </p>
       </div>
 
@@ -79,7 +80,9 @@ export function CalcConfirm() {
                 { icon: '🧹', label: 'Service', value: `${selectedService || 'house'} cleaning` },
                 { icon: '📍', label: 'Address', value: propertyData?.formattedAddress || 'Selected address' },
                 { icon: '💰', label: 'Estimate', value: `$${quote?.low || 150}-${quote?.high || 185}` },
-                { icon: '📅', label: 'Requested', value: 'Thursday 29 May, 9:00 AM' },
+                { icon: '✅', label: 'Deposit paid', value: paidAmount ? `$${paidAmount} AUD` : 'Confirmed' },
+                { icon: '📅', label: 'Scheduled', value: scheduleSummary ? `${scheduleSummary.dateLabel}, ${scheduleSummary.time}` : '—' },
+                { icon: '🔖', label: 'Reference', value: activeBooking?.booking_reference || paymentResult?.bookingReference || '—' },
               ].map(row => (
                 <div key={row.label} style={{ display: 'flex', alignItems: 'center', gap: '0.75rem' }}>
                   <span style={{ fontSize: 18, flexShrink: 0 }}>{row.icon}</span>
@@ -97,7 +100,7 @@ export function CalcConfirm() {
             <div style={{ fontSize: 12, fontWeight: 600, color: '#0E7C7B', marginBottom: '0.75rem' }}>What happens next</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
               {[
-                { icon: <MessageSquare size={14} />, text: 'You\'ll get an SMS confirmation within minutes' },
+                { icon: <MessageSquare size={14} />, text: 'Payment receipt details will be sent to your email if provided' },
                 { icon: <Calendar size={14} />, text: 'A cleaner will confirm your booking within 2 hours' },
                 { icon: '✨', text: 'Your home gets cleaned. Done.' },
               ].map((item, i) => (

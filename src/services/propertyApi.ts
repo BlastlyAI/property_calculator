@@ -1,4 +1,13 @@
-import type { ApiResponse, PropertyData, QuoteRange, ServiceAnswers, ServiceConfig, ServiceId } from "../types/calculator";
+import type {
+  ApiResponse,
+  BookingRequestPayload,
+  BookingResponse,
+  PropertyData,
+  QuoteRange,
+  ServiceAnswers,
+  ServiceConfig,
+  ServiceId,
+} from "../types/calculator";
 
 export interface PlacePrediction {
   placeId: string;
@@ -57,5 +66,18 @@ export async function fetchServiceConfigs(): Promise<ServiceConfig[]> {
   const data: ApiResponse<{ services: ServiceConfig[] }> = await res.json();
   if (!data.success || !data.data) throw new Error(data.error?.message || "Failed to load service config");
   return data.data.services;
+}
+
+export async function createBooking(payload: BookingRequestPayload): Promise<BookingResponse> {
+  const res = await fetch("/api/bookings", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(payload),
+  });
+  const data: ApiResponse<BookingResponse> = await res.json();
+  if (!res.ok || !data.success || !data.data) {
+    throw new Error(data.error?.message || "Failed to create booking");
+  }
+  return data.data;
 }
 

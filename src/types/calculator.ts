@@ -66,6 +66,73 @@ export interface QuoteRange {
   high: number;
 }
 
+export interface BookingCustomerInput {
+  fullName: string;
+  phone: string;
+  email?: string;
+}
+
+export interface BookingScheduleInput {
+  date: string;
+  time: string;
+  notes?: string;
+}
+
+export interface BookingRequestPayload {
+  serviceId: ServiceId;
+  property: PropertyData;
+  quote: QuoteRange;
+  answers?: Record<string, unknown>;
+  customer: BookingCustomerInput;
+  schedule: BookingScheduleInput;
+  sessionId?: string;
+}
+
+export interface ActiveBooking {
+  id: string;
+  booking_reference: string;
+  status: string;
+  booking_date: string;
+  booking_time: string;
+  payment_status?: string;
+  payment_amount?: number;
+  created_at: string;
+}
+
+export interface BookingResponse {
+  booking: ActiveBooking;
+}
+
+export interface PaymentSession {
+  alreadyPaid: boolean;
+  booking: ActiveBooking;
+  clientSecret: string | null;
+  publishableKey: string;
+  amountCents: number;
+  depositAud: number;
+}
+
+export interface PaymentConfirmResult {
+  booking: {
+    id: string;
+    booking_reference: string;
+    status: string;
+    payment_status: string;
+    payment_amount: number | null;
+    paid_at: string | null;
+  };
+  payment: {
+    status: string;
+    amountCents: number;
+    currency: string;
+  };
+}
+
+export interface ScheduleSummary {
+  dateLabel: string;
+  time: string;
+}
+
 export interface ServiceAnswers {
   [serviceId: string]: Record<string, unknown> | undefined;
 }

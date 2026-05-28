@@ -6,12 +6,15 @@
   "scripts": {
     "dev": "concurrently \"pnpm dev:frontend\" \"pnpm dev:backend\"",
     "dev:frontend": "vite",
-    "dev:backend": "node --watch backend/server.js",
+    "dev:backend": "node --env-file=.env.local --watch backend/server.js",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@stripe/react-stripe-js": "^6.4.0",
+    "@stripe/stripe-js": "^9.7.0",
+    "@supabase/supabase-js": "^2.106.2",
     "@tailwindcss/vite": "^4.3.0",
     "clsx": "^2.1.1",
     "concurrently": "^9.2.1",
@@ -22,6 +25,7 @@
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.15.1",
+    "stripe": "^22.1.1",
     "tailwindcss": "^4.3.0",
     "wouter": "^3.10.0"
   },
