@@ -1,0 +1,151 @@
+{
+  "services": [
+    {
+      "id": "house",
+      "title": "House & Home Cleaning",
+      "description": "Regular, deep clean, or end of lease",
+      "startingFromLabel": "From $120",
+      "icon": "🧹",
+      "questions": [
+        {
+          "id": "condition",
+          "label": "Home condition",
+          "type": "gridCards",
+          "options": [
+            { "id": "tidy", "label": "Tidy", "description": "Generally clean, light dust", "icon": "✨" },
+            { "id": "average", "label": "Average", "description": "Normal lived-in home", "icon": "🏠" },
+            { "id": "needs-work", "label": "Needs some work", "description": "A bit behind on cleaning", "icon": "🧹" },
+            { "id": "heavy", "label": "Heavy clean", "description": "Significant build-up", "icon": "💪" }
+          ]
+        },
+        {
+          "id": "pets",
+          "label": "Pets in the home?",
+          "type": "binaryCards",
+          "options": [
+            { "id": "yes", "label": "Yes 🐾", "description": "Pet hair & dander" },
+            { "id": "no", "label": "No 🚫", "description": "No pets" }
+          ]
+        },
+        {
+          "id": "extras",
+          "label": "Extras (optional)",
+          "type": "multiSelectList",
+          "options": [
+            { "id": "oven", "label": "Oven clean", "priceLabel": "+$45" },
+            { "id": "fridge", "label": "Fridge inside", "priceLabel": "+$25" },
+            { "id": "windows", "label": "Interior windows", "priceLabel": "+$35" },
+            { "id": "garage", "label": "Garage", "priceLabel": "+$40" }
+          ]
+        }
+      ],
+      "quoteRules": {
+        "baseBySize": { "small": 120, "medium": 150, "large": 195 },
+        "perBedroom": 18,
+        "perBathroom": 25,
+        "conditionMultiplier": { "tidy": 1, "average": 1.1, "needs-work": 1.2, "heavy": 1.35 },
+        "petsMultiplier": { "yes": 1.08, "no": 1 },
+        "extras": { "oven": 45, "fridge": 25, "windows": 35, "garage": 40 }
+      }
+    },
+    {
+      "id": "carpet",
+      "title": "Carpet Cleaning",
+      "description": "Steam clean, stain treatment, deodorise",
+      "startingFromLabel": "From $80",
+      "icon": "🏠",
+      "questions": [
+        {
+          "id": "rooms",
+          "label": "How many rooms have carpet?",
+          "type": "counter",
+          "defaultFromProperty": "bedrooms",
+          "min": 1,
+          "max": 10,
+          "unitLabel": "rooms",
+          "helperText": "Pre-filled from bedroom count"
+        },
+        {
+          "id": "stain",
+          "label": "Stain level",
+          "type": "singleList",
+          "options": [
+            { "id": "light", "label": "Light - normal use", "description": "Regular wear, no significant staining", "icon": "💚" },
+            { "id": "moderate", "label": "Moderate - some staining", "description": "A few spots or marks to treat", "icon": "🟡" },
+            { "id": "heavy", "label": "Heavy - significant staining", "description": "Multiple stains, heavy soiling", "icon": "🔴" }
+          ]
+        },
+        {
+          "id": "extras",
+          "label": "Extras (optional)",
+          "type": "multiSelectList",
+          "options": [
+            { "id": "deodorise", "label": "Deodorising", "priceLabel": "+$30" },
+            { "id": "stain", "label": "Stain treatment", "priceLabel": "+$45" },
+            { "id": "scotchgard", "label": "Scotchgard protection", "priceLabel": "+$60" }
+          ]
+        }
+      ],
+      "quoteRules": {
+        "base": 80,
+        "perRoom": 24,
+        "stainMultiplier": { "light": 1, "moderate": 1.18, "heavy": 1.35 },
+        "extras": { "deodorise": 30, "stain": 45, "scotchgard": 60 }
+      }
+    },
+    {
+      "id": "windows",
+      "title": "Window Cleaning",
+      "description": "Interior and exterior, all property types",
+      "startingFromLabel": "From $95",
+      "icon": "🪟",
+      "questions": [
+        {
+          "id": "windowCount",
+          "label": "Window count",
+          "type": "counter",
+          "defaultFromProperty": "windowEstimate",
+          "min": 1,
+          "max": 50,
+          "unitLabel": "windows",
+          "helperText": "Estimated from property size"
+        },
+        {
+          "id": "scope",
+          "label": "Cleaning scope",
+          "type": "binaryCards",
+          "options": [
+            { "id": "exterior", "label": "Exterior only", "description": "Outside surfaces", "icon": "🪟" },
+            { "id": "both", "label": "Interior & exterior", "description": "Full clean both sides", "icon": "✨" }
+          ]
+        },
+        {
+          "id": "hardAccess",
+          "label": "Do any windows require a ladder or special access?",
+          "type": "binaryPills",
+          "options": [
+            { "id": "yes", "label": "Yes" },
+            { "id": "no", "label": "No" }
+          ]
+        },
+        {
+          "id": "extras",
+          "label": "Extras (optional)",
+          "type": "multiSelectList",
+          "options": [
+            { "id": "tracks", "label": "Screen tracks", "priceLabel": "+$20" },
+            { "id": "frames", "label": "Frames and sills", "priceLabel": "+$30" }
+          ]
+        }
+      ],
+      "quoteRules": {
+        "base": 95,
+        "perWindow": 7,
+        "scopeMultiplier": { "exterior": 1, "both": 1.35 },
+        "hardAccessMultiplier": { "yes": 1.18, "no": 1 },
+        "extras": { "tracks": 20, "frames": 30 }
+      }
+    }
+  ]
+}
+

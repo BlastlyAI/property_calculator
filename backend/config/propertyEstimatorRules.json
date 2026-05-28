@@ -1,0 +1,48 @@
+{
+  "density": {
+    "high": {
+      "houseSizeRange": [70, 165],
+      "landMultiplierRange": [1.1, 1.8],
+      "windowPerBedroom": 2.6,
+      "gardenRatioRange": [0.05, 0.22],
+      "poolChance": 0.04
+    },
+    "medium": {
+      "houseSizeRange": [100, 240],
+      "landMultiplierRange": [1.7, 2.7],
+      "windowPerBedroom": 3.2,
+      "gardenRatioRange": [0.12, 0.35],
+      "poolChance": 0.1
+    },
+    "low": {
+      "houseSizeRange": [120, 340],
+      "landMultiplierRange": [2.5, 4.3],
+      "windowPerBedroom": 3.8,
+      "gardenRatioRange": [0.25, 0.55],
+      "poolChance": 0.19
+    }
+  },
+  "propertyTypeWeights": {
+    "high": {
+      "unit": 0.42,
+      "townhouse": 0.28,
+      "house": 0.3
+    },
+    "medium": {
+      "unit": 0.2,
+      "townhouse": 0.28,
+      "house": 0.52
+    },
+    "low": {
+      "unit": 0.08,
+      "townhouse": 0.22,
+      "house": 0.7
+    }
+  },
+  "storeysChance": {
+    "unit": 0.15,
+    "townhouse": 0.78,
+    "house": 0.35
+  }
+}
+
