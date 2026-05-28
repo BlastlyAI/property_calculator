@@ -1,13 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Logo } from './components/Logo';
-import { MapPin, Search, Tag, Home, Layers, Wind, ChevronRight, CheckCircle, Star, Building2, Zap } from 'lucide-react';
-
-const TYPING_SEQUENCE = [
-  '12 Maple Street, Surry Hills',
-  '12 Maple Street, Surry Hills NSW',
-  '12 Maple Street, Surry Hills NSW 2010',
-];
+import { MapPin, Search, Tag, Home, ChevronRight, CheckCircle, Building2, Zap } from 'lucide-react';
 
 function TypingAnimation() {
   const [displayText, setDisplayText] = useState('');

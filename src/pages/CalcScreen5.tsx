@@ -101,6 +101,10 @@ export function CalcScreen5() {
       setSubmitError(blockingReason || 'Please complete all required booking details.');
       return;
     }
+    if (!selectedService || !propertyData || !quote) {
+      setSubmitError('Property session expired. Please wait for restore or restart from step 1.');
+      return;
+    }
     try {
       setSubmitting(true);
       setSubmitError(null);

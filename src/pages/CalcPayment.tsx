@@ -8,11 +8,9 @@ import { useCalculator } from '../state/calculatorContext';
 import { confirmPayment, createPaymentIntent } from '../services/paymentApi';
 
 function PaymentForm({
-  bookingId,
   amountAud,
   onPaid,
 }: {
-  bookingId: string;
   amountAud: number;
   onPaid: (paymentIntentId: string) => Promise<void>;
 }) {
@@ -176,7 +174,7 @@ export function CalcPayment() {
         )}
         {!loading && !error && clientSecret && stripePromise && (
           <Elements stripe={stripePromise} options={{ clientSecret, appearance: { theme: 'stripe', variables: { colorPrimary: '#0E7C7B' } } }}>
-            <PaymentForm bookingId={activeBooking!.id} amountAud={depositAud} onPaid={handlePaid} />
+            <PaymentForm amountAud={depositAud} onPaid={handlePaid} />
           </Elements>
         )}
       </div>

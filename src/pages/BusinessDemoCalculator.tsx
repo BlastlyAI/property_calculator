@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const SERVICES = [
   { id: 'house', icon: '🏠', label: 'House Clean', desc: 'Regular or one-off clean' },
@@ -8,7 +7,6 @@ const SERVICES = [
 ];
 
 export function BusinessDemoCalculator() {
-  const navigate = useNavigate();
   const [selectedService, setSelectedService] = useState('house');
   const [bedrooms, setBedrooms] = useState(3);
   const [bathrooms, setBathrooms] = useState(2);

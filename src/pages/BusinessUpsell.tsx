@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Logo } from './components/Logo';
 
 const STYLE_OPTIONS = [
@@ -9,7 +8,6 @@ const STYLE_OPTIONS = [
 ];
 
 export function BusinessUpsell() {
-  const navigate = useNavigate();
   const [selectedStyle, setSelectedStyle] = useState<string>('');
   const [submitted, setSubmitted] = useState(false);
   const [form, setForm] = useState({

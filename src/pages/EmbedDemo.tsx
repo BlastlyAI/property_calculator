@@ -165,7 +165,6 @@ function HomeSnapWidget({ onClose }: { onClose?: () => void }) {
 
 export function EmbedDemo() {
   const navigate = useNavigate();
-  const [showWidget, setShowWidget] = useState(false);
 
   return (
     <div style={{ fontFamily: 'DM Sans, Inter, sans-serif', minHeight: '100vh', background: '#f9fafb' }}>
